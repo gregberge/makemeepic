@@ -21,8 +21,8 @@ export function Form() {
       form.append("file", acceptedFiles[0]);
       setState({ status: "loading", error: null, result: null });
       generateTitle(form)
-        .then((title) => {
-          setState({ status: "success", error: null, result: title });
+        .then((text) => {
+          setState({ status: "success", error: null, result: text });
         })
         .catch((error) => {
           setState({ status: "error", error, result: null });

@@ -1,22 +1,28 @@
 import OpenAI from "openai";
+import { OpenAIStream, StreamingTextResponse } from "ai";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function getTitlesResponse(input: string) {
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model: "gpt-3.5-turbo-16k",
     messages: [
       {
         role: "system",
         content:
-          'From the CV of the person, give them titles like Daenerys in Game of Thrones.\n\nTitles must be on the same line, like "Name, title, title, title".',
+          'From the CV of the person, generate between 8 and 10 epic titles like Daenerys from Game of Thrones.\n\nTitles must be on the same line, like "Name, title, title, title".',
       },
       {
         role: "user",
         content: input,
       },
     ],
+    stream: true,
   });
 
-  return response;
+  // Convert the response into a friendly text-stream
+  const stream = OpenAIStream(response);
+
+  // Respond with the stream
+  return new StreamingTextResponse(stream);
 }

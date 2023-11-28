@@ -4,7 +4,7 @@ import { extractTextFromPdf } from "@/lib/linkedin-pdf";
 import { getTitlesResponse } from "@/lib/openai";
 
 function checkIsFile(file: any): file is File {
-  return file instanceof File;
+  return file && file.name && file.arrayBuffer;
 }
 
 export async function generateTitle(form: FormData) {

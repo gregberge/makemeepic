@@ -24,7 +24,10 @@ function isSectionItem(item: TextItem): boolean {
 }
 
 export async function extractTextFromPdf(buffer: ArrayBuffer) {
-  const { getDocument } = await import(/* webpackIgnore: true */ "pdfjs-dist");
+  const { getDocument } = await import(
+    /* webpackIgnore: true */ "pdfjs-dist/build/pdf.min.mjs"
+  );
+  await import("pdfjs-dist/build/pdf.worker.min.mjs");
 
   const document = await getDocument(buffer).promise;
 

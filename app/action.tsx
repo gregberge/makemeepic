@@ -19,6 +19,7 @@ export async function generateTitle(form: FormData) {
   console.log("Extract text from PDF");
   const text = await extractTextFromPdf(buffer);
   console.log("Generate titles from OpenAI");
+  return text;
   const titles = await getTitlesResponse(text);
   const choice = titles.choices[0];
   if (!choice?.message?.content) {

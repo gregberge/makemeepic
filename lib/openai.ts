@@ -6,7 +6,7 @@ const openai = new OpenAI({
 
 export async function getTitlesResponse(input: string) {
   const response = await openai.chat.completions.create({
-    model: "gpt-4-1106-preview",
+    model: "gpt-3.5-turbo-16k",
     messages: [
       {
         role: "system",

@@ -1,7 +1,8 @@
 "use client";
 import * as React from "react";
 import { useDropzone } from "react-dropzone";
-import { generateTitle } from "./action";
+import { generateTitles } from "./generateTitlesFromAi";
+import { extractTextFromCV } from "./extractTextFromCV";
 
 export function Form() {
   const [state, setState] = React.useState<{
@@ -20,9 +21,10 @@ export function Form() {
 
       form.append("file", acceptedFiles[0]);
       setState({ status: "loading", error: null, result: null });
-      generateTitle(form)
-        .then((text) => {
-          setState({ status: "success", error: null, result: text });
+      extractTextFromCV(form)
+        .then((text) => generateTitles(text))
+        .then((titles) => {
+          setState({ status: "success", error: null, result: titles });
         })
         .catch((error) => {
           setState({ status: "error", error, result: null });

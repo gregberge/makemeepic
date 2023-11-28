@@ -13,7 +13,8 @@ export async function generateTitles(text: string) {
       {
         role: "system",
         content:
-          'From the CV of the person, generate between 8 and 10 epic titles like Daenerys from Game of Thrones. Titles must be on the same line, like "Name, title, title, title".',
+          "From the CV of the person, generate between 8 and 10 epic titles like Daenerys from Game of Thrones." +
+          '\nTitles must be on the same line, like "Name, title, title, title".',
       },
       {
         role: "user",

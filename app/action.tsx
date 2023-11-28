@@ -1,6 +1,6 @@
 "use server";
 
-import { extractTextFromPdf } from "@/lib/linkedin-pdf";
+// import { extractTextFromPdf } from "@/lib/linkedin-pdf";
 import OpenAI from "openai";
 
 function checkIsFile(file: any): file is File {
@@ -20,10 +20,10 @@ export async function generateTitle(form: FormData) {
   console.log("Got file", file.name);
   console.log("Converting to array buffer");
   const buffer = await file.arrayBuffer();
-  console.log("Extract text from PDF");
-  const text = await extractTextFromPdf(buffer);
-  console.log("Got text", text);
-  console.log("Generate titles from OpenAI");
+  // console.log("Extract text from PDF");
+  // const text = await extractTextFromPdf(buffer);
+  // console.log("Got text", text);
+  // console.log("Generate titles from OpenAI");
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-16k",
     messages: [
@@ -34,7 +34,7 @@ export async function generateTitle(form: FormData) {
       },
       {
         role: "user",
-        content: text,
+        content: "Hello",
       },
     ],
   });

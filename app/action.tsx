@@ -13,8 +13,12 @@ export async function generateTitle(form: FormData) {
     throw new Error("File not found");
   }
 
+  console.log("Got file", file.name);
+  console.log("Converting to array buffer");
   const buffer = await file.arrayBuffer();
+  console.log("Extract text from PDF");
   const text = await extractTextFromPdf(buffer);
+  console.log("Generate titles from OpenAI");
   const titles = await getTitlesResponse(text);
   const choice = titles.choices[0];
   if (!choice?.message?.content) {

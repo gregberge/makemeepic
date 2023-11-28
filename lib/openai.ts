@@ -1,12 +1,10 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function getTitlesResponse(input: string) {
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo-16k",
+    model: "gpt-3.5-turbo",
     messages: [
       {
         role: "system",
@@ -18,11 +16,6 @@ export async function getTitlesResponse(input: string) {
         content: input,
       },
     ],
-    temperature: 1,
-    max_tokens: 256,
-    top_p: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0,
   });
 
   return response;

@@ -18,13 +18,13 @@ export async function POST(req: Request) {
   const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     stream: true,
+    temperature: 1.1,
     messages: [
       {
         role: "system",
         content: `
 The next input will be the CV of a person. Generate between 8 and 10 short epic titles like Daenerys Targaryen.
-- Output: "Name, Title, Title, Title.
-- Don't repeat the name of the person.
+Example of Output: "Daenerys Targaryen, the First of Her Name, Queen of the Andals and the First Men, Protector of the Seven Kingdoms, the Mother of Dragons, the Khaleesi of the Great Grass Sea, the Unburnt, the Breaker of Chains."
 `.trim(),
       },
       ...messages,

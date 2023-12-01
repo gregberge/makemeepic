@@ -149,10 +149,7 @@ export function Form() {
             key={index}
             className="p-4 rounded-[66px] bg-gradient-to-b from-orange-500 to-yellow-300 flex min-h-[30rem] mb-8"
           >
-            <div
-              className="p-10 rounded-[50px] min-h-[23rem] text-3xl leading-[1.6] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-violet-600 to-sky-900 flex items-center justify-center w-full"
-              style={{ textWrap: "balance" } as any}
-            >
+            <div className="p-10 rounded-[50px] min-h-[23rem] text-3xl leading-[1.6] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-violet-600 to-sky-900 w-full text-left">
               {message?.content ?? "Loading..."}
             </div>
           </div>

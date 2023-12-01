@@ -30,6 +30,7 @@ Generate titles from the CV of a person.
 - The input will be a CV of a person.
 - Make it epic and fun!
 - No multiple propositions.
+- In the language of the CV.
 "
 `.trim(),
       },

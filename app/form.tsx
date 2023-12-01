@@ -98,14 +98,14 @@ export function Form() {
         <div className="flex flex-col gap-8 max-w-xl mx-auto">
           <div
             className={clsx(
-              "p-10 border border-dashed flex flex-col items-center justify-center bg-[#00153B] rounded-lg transition-all text-xl min-h-[20rem]",
+              "border border-dashed flex flex-col items-center justify-center bg-[#00153B] rounded-lg transition-all text-xl",
               "border-[#4D77C1]",
             )}
           >
             {state.status === "idle" && (
               <div
                 {...getRootProps()}
-                className="mb-4 cursor-pointer text-center w-full flex flex-col gap-8 justify-center items-center text-lg select-none text-xl"
+                className="p-10 cursor-pointer text-center w-full flex flex-col gap-8 justify-center items-center text-lg select-none text-xl"
               >
                 <input {...getInputProps()} />
                 <Image
@@ -121,7 +121,11 @@ export function Form() {
                 )}
               </div>
             )}
-            {state.status === "loading" && <p>Analyzing your CV...</p>}
+            {state.status === "loading" && (
+              <div className="my-10 h-12 flex items-center justify-center">
+                Analyzing your CV...
+              </div>
+            )}
             {state.status === "success" && (
               <div>
                 <Button

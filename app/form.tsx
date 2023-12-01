@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { generateTitles } from "./generateTitlesFromAi";
 import { extractTextFromCV } from "./extractTextFromCV";
 import { useChat } from "ai/react";
+import Image from "next/image";
 
 export function Form() {
   const { append, messages, isLoading } = useChat();
@@ -36,12 +37,13 @@ export function Form() {
 
   const agentMessages = messages.filter((m) => m.role === "assistant");
   return (
-    <div className="flex flex-col gap-8 max-w-xl">
+    <div className="flex flex-col gap-8 max-w-xl mx-auto">
       <div
         {...getRootProps()}
-        className="p-10 border rounded-lg mb-4 text-center w-full"
+        className="p-10 border border-dashed bg-[#00153B] border-[#4D77C1] rounded-lg mb-4 text-center w-full flex flex-col gap-8 justify-center items-center font-sans"
       >
         <input {...getInputProps()} />
+        <Image src="/assets/pdf-icon.svg" width={88} height={88} alt="" />
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (

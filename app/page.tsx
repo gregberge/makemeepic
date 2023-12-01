@@ -46,33 +46,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-[#011A46] z-10 relative py-16">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="text-5xl">Import your resume from LinkedIn</div>
-          <Image
-            src="/assets/separator.svg"
-            alt=""
-            width={316}
-            height={36}
-            className="mx-auto my-12"
-          />
-          <div className="text-3xl mt-10 mb-8">
-            1. Go to your LinkedIn Profile
-          </div>
-          <div className="bg-[#203B6C] rounded-lg p-4 my-4 inline-block text-2xl">
-            https://linked.com/in/your-name
-          </div>
-          <div className="text-3xl mt-10 mb-8">
-            2. Select “Save to PDF” from the dropdown
-          </div>
-          <div className="relative max-w-lg w-full aspect-[572/508] mt-10 mb-8 mx-auto">
-            <Image quality={100} src="/assets/linkedin-page.png" alt="" fill />
-          </div>
-          <div className="text-3xl mt-10 mb-8">
-            3. Upload your PDF to MakeMeEpic
-          </div>
-          <Form />
-        </div>
+      <div className="bg-[#011A46] z-10 relative pt-20 pb-40">
+        <Form />
       </div>
     </main>
   );

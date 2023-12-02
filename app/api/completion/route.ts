@@ -10,9 +10,7 @@ const openai = new OpenAI({
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
-
-  console.log(messages.length);
+  const { prompt, level } = await req.json();
 
   // Ask OpenAI for a streaming chat completion given the prompt
   const response = await openai.chat.completions.create({
@@ -21,9 +19,9 @@ export async function POST(req: Request) {
     temperature: 1.1,
     messages: [
       {
-        role: "system",
+        role: "user",
         content: `
-Generate titles from the CV of a person.
+Given a CV, generate titles for the person, with the following constraints:
 - Example of Output: "Daenerys Targaryen, the First of Her Name, Queen of the Andals and the First Men, Protector of the Seven Kingdoms, the Mother of Dragons, the Khaleesi of the Great Grass Sea, the Unburnt, the Breaker of Chains.
 - One line with every titles.
 - Between 8 and 10 titles.
@@ -31,10 +29,16 @@ Generate titles from the CV of a person.
 - Make it epic and fun!
 - No multiple propositions.
 - In the language of the CV.
+
+Resume of CV:
+${prompt}
 "
 `.trim(),
       },
-      ...messages,
+      ...Array.from({ length: level }, () => ({
+        role: "user" as const,
+        content: "More epic",
+      })),
     ],
   });
   // Convert the response into a friendly text-stream

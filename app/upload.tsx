@@ -40,7 +40,7 @@ export function Upload(props: { onComplete: (resume: string) => void }) {
     useDropzone({
       multiple: false,
       accept: {
-        "application/pdf": ["pdf"],
+        "application/pdf": [".pdf"],
       },
       onDrop: (acceptedFiles) => {
         const file = acceptedFiles[0];

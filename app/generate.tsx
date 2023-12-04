@@ -4,14 +4,11 @@ import { useCompletion } from "ai/react";
 import clsx from "clsx";
 import { Button } from "@/components/button";
 import { ResumeResult } from "./types";
+import { Card } from "@/components/card";
 
 const Name = React.memo(function Name({ resume }: { resume: string }) {
   const name = resume.match(/# (.*)/i)?.[1] ?? "You";
-  return (
-    <div className="absolute text-4xl bg-gradient-to-b ring-1 ring-yellow-600 border-4 border-yellow-400 from-red-900 to-pink-800 px-10 py-2 rounded-xl -top-8 left-1/2 -translate-x-1/2">
-      {name}
-    </div>
-  );
+  return <>{name}</>;
 });
 
 const Completion = React.memo(function Completion({
@@ -32,12 +29,11 @@ const Completion = React.memo(function Completion({
   }, [complete, resume, level]);
 
   return (
-    <div className="relative ring-1 ring-yellow-600 p-2 rounded-[58px] bg-gradient-to-b from-yellow-500 to-yellow-300 flex min-h-[20rem] mb-20 shadow-glow">
-      <Name resume={resume.text} />
-      <div className="p-10 pt-14 rounded-[50px] min-h-[23rem] text-3xl leading-[1.6] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-violet-600 to-sky-900 w-full text-left whitespace-pre-line">
-        {completion || "Loading..."}
-      </div>
-    </div>
+    <Card
+      title={<Name resume={resume.text} />}
+      text={completion || "Loading..."}
+      className="mb-8"
+    />
   );
 });
 

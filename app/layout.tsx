@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { IM_Fell_English } from "next/font/google";
+import { Caudex, IM_Fell_English } from "next/font/google";
 import "./globals.css";
 
 const im = IM_Fell_English({
   weight: "400",
   variable: "--font-im",
+  subsets: ["latin"],
+});
+
+const caudex = Caudex({
+  weight: "400",
+  variable: "--font-caudex",
   subsets: ["latin"],
 });
 
@@ -22,7 +28,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${im.variable} font-im text-white bg-[#011A46]`}
+      className={`${im.variable} ${caudex.variable} font-im text-white bg-[#011A46]`}
     >
       <body>{children}</body>
     </html>

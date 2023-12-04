@@ -35,7 +35,7 @@ Given a CV, generate titles for the person, with the following constraints:
 - Make it epic and fun!
 - No multiple propositions.
 - In the language of the CV.
-- Maximum 240 characters.
+- Maximum 300 characters.
 
 Resume of CV:
 ${prompt}

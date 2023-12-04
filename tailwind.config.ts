@@ -13,6 +13,7 @@ const config: Config = {
       },
       fontFamily: {
         im: ["var(--font-im)"],
+        caudex: ["var(--font-caudex)"],
       },
       keyframes: {
         floatY: {

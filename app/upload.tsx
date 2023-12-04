@@ -6,6 +6,7 @@ import Image from "next/image";
 import clsx from "clsx";
 import { Button } from "@/components/button";
 import { FileText } from "lucide-react";
+import { ResumeResult } from "./types";
 
 type State =
   | {
@@ -26,10 +27,10 @@ type State =
   | {
       status: "success";
       error: null;
-      result: string;
+      result: ResumeResult;
     };
 
-export function Upload(props: { onComplete: (resume: string) => void }) {
+export function Upload(props: { onComplete: (result: ResumeResult) => void }) {
   const [state, setState] = React.useState<State>({
     status: "idle",
     error: null,
@@ -49,8 +50,9 @@ export function Upload(props: { onComplete: (resume: string) => void }) {
         form.append("file", file);
         setState({ status: "loading", error: null, result: null });
         extractTextFromCV(form)
-          .then((text) => {
-            setState({ status: "success", error: null, result: text });
+          .then((result) => {
+            console.log({ result });
+            setState({ status: "success", error: null, result });
           })
           .catch((error) => {
             setState({ status: "error", error, result: null });

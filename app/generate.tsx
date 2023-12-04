@@ -3,6 +3,7 @@ import * as React from "react";
 import { useCompletion } from "ai/react";
 import clsx from "clsx";
 import { Button } from "@/components/button";
+import { ResumeResult } from "./types";
 
 const Name = React.memo(function Name({ resume }: { resume: string }) {
   const name = resume.match(/# (.*)/i)?.[1] ?? "You";
@@ -19,7 +20,7 @@ const Completion = React.memo(function Completion({
   onFinish,
 }: {
   level: number;
-  resume: string;
+  resume: ResumeResult;
   onFinish: () => void;
 }) {
   const { complete, completion } = useCompletion({
@@ -27,12 +28,12 @@ const Completion = React.memo(function Completion({
   });
 
   React.useEffect(() => {
-    complete(resume, { body: { level } });
+    complete(resume.text, { body: { level, signature: resume.signature } });
   }, [complete, resume, level]);
 
   return (
     <div className="relative ring-1 ring-yellow-600 p-2 rounded-[58px] bg-gradient-to-b from-yellow-500 to-yellow-300 flex min-h-[20rem] mb-20 shadow-glow">
-      <Name resume={resume} />
+      <Name resume={resume.text} />
       <div className="p-10 pt-14 rounded-[50px] min-h-[23rem] text-3xl leading-[1.6] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-violet-600 to-sky-900 w-full text-left whitespace-pre-line">
         {completion || "Loading..."}
       </div>
@@ -40,7 +41,7 @@ const Completion = React.memo(function Completion({
   );
 });
 
-export function Generate(props: { resume: string }) {
+export function Generate(props: { resume: ResumeResult }) {
   const [iteration, setIteration] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const finish = React.useCallback(() => {

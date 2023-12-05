@@ -72,7 +72,7 @@ ${params.prompt}
       },
       async flush(controller) {
         const signature = await signText(text);
-        console.log({ text, signature });
+        console.log("DEBUG flush", { text, signature });
         controller.enqueue(`---SIGN---\n${signature}`);
       },
     });

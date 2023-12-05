@@ -19,9 +19,6 @@ const Name = React.memo(function Name({ resume }: { resume: string }) {
 
 function parseCompletion(completion: string) {
   const [text, signature] = completion.split(/---SIGN---\s/);
-  if (!text || !signature) {
-    throw new Error("Invalid completion");
-  }
   return { text, signature };
 }
 
@@ -97,6 +94,9 @@ const Completion = React.memo(function Completion({
 
   const { text, signature } = parseCompletion(completion);
   const loading = !text || isLoading;
+  if (!loading && !signature) {
+    throw new Error("Invalid signature");
+  }
 
   return (
     <div className="relative mb-20">

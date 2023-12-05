@@ -63,17 +63,18 @@ ${params.prompt}
   });
   // Convert the response into a friendly text-stream
   const stream = OpenAIStream(response);
+  const decoder = new TextDecoder();
+  const encoder = new TextEncoder();
   const appendSignature = () => {
     let text = "";
     return new TransformStream({
       transform(chunk, controller) {
-        text += Buffer.from(chunk).toString("utf-8");
+        text += decoder.decode(chunk);
         controller.enqueue(chunk);
       },
       async flush(controller) {
         const signature = await signText(text);
-        console.log("DEBUG flush", { text, signature });
-        controller.enqueue(`---SIGN---\n${signature}`);
+        controller.enqueue(encoder.encode(`---SIGN---\n${signature}`));
       },
     });
   };

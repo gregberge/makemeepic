@@ -7,6 +7,8 @@ const im = IM_Fell_English({
   weight: "400",
   variable: "--font-im",
   subsets: ["latin"],
+  display: "swap",
+  adjustFontFallback: false,
 });
 
 const caudex = Caudex({

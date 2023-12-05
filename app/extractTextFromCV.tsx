@@ -2,7 +2,7 @@
 
 import { extractTextFromPdf } from "@/lib/linkedin-pdf";
 import { ResumeResult } from "./types";
-import { signText } from "./signature";
+import { signText } from "@/lib/signature";
 
 function checkIsFile(file: any): file is File {
   return file && file.name && file.arrayBuffer;

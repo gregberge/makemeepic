@@ -5,10 +5,55 @@ import clsx from "clsx";
 import { Button } from "@/components/button";
 import { ResumeResult } from "./types";
 import { Card } from "@/components/card";
+import { useClipboard } from "use-clipboard-copy";
+import { formatToken } from "@/lib/token";
+
+const getNameFromResume = (resume: string) => {
+  return resume.match(/# (.*)/i)?.[1] ?? "You";
+};
 
 const Name = React.memo(function Name({ resume }: { resume: string }) {
-  const name = resume.match(/# (.*)/i)?.[1] ?? "You";
-  return <>{name}</>;
+  return <>{getNameFromResume(resume)}</>;
+});
+
+function parseCompletion(completion: string) {
+  const [text, signature] = completion.split(/---SIGN---\s/);
+  return { text, signature };
+}
+
+const CompletionShare = React.memo(function CompletionShare({
+  text,
+  signature,
+  resume,
+}: {
+  text: string;
+  signature: string;
+  resume: string;
+}) {
+  const name = getNameFromResume(resume);
+  const token = formatToken({ name, text, signature });
+  const url = new URL(`/share/${token}`, window.location.origin);
+  const shareText = `👑 Just unleashed my legendary titles!\nGenerate yours with ${window.location.origin}.\n${url.href}`;
+
+  const clipboard = useClipboard({ copiedTimeout: 600 });
+
+  return (
+    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-4 items-center">
+      <Button asChild>
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+            shareText,
+          )}`}
+          target="_blank"
+        >
+          Share on X
+        </a>
+      </Button>
+      <Button type="button" onClick={() => clipboard.copy(url.href)}>
+        {clipboard.copied ? "Copied" : "Copy link"}
+      </Button>
+    </div>
+  );
 });
 
 const Completion = React.memo(function Completion({
@@ -20,7 +65,7 @@ const Completion = React.memo(function Completion({
   resume: ResumeResult;
   onFinish: () => void;
 }) {
-  const { complete, completion } = useCompletion({
+  const { complete, completion, isLoading } = useCompletion({
     onFinish,
   });
 
@@ -28,17 +73,29 @@ const Completion = React.memo(function Completion({
     complete(resume.text, { body: { level, signature: resume.signature } });
   }, [complete, resume, level]);
 
+  const { text, signature } = parseCompletion(completion);
+  const loading = !text || isLoading;
+
   return (
-    <Card
-      title={<Name resume={resume.text} />}
-      text={completion || "Loading..."}
-      className="mb-8"
-    />
+    <div className="relative mb-20">
+      <Card
+        title={<Name resume={resume.text} />}
+        text={text || "Loading..."}
+        textAlign={!text || isLoading ? "left" : "center"}
+      />
+      {!loading && (
+        <CompletionShare
+          text={text}
+          signature={signature}
+          resume={resume.text}
+        />
+      )}
+    </div>
   );
 });
 
 export function Generate(props: { resume: ResumeResult }) {
-  const [iteration, setIteration] = React.useState(0);
+  const [level, setLevel] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const finish = React.useCallback(() => {
     setIsLoading(false);
@@ -46,7 +103,7 @@ export function Generate(props: { resume: ResumeResult }) {
 
   return (
     <div className="mx-auto max-w-3xl text-center">
-      {Array.from({ length: iteration + 1 }).map((_, index) => {
+      {Array.from({ length: level + 1 }).map((_, index) => {
         return (
           <Completion
             key={index}
@@ -56,18 +113,20 @@ export function Generate(props: { resume: ResumeResult }) {
           />
         );
       })}
-      <div className="text-center">
-        <Button
-          onClick={() => {
-            setIteration((n) => n + 1);
-            setIsLoading(true);
-          }}
-          disabled={isLoading}
-          className={clsx(isLoading && "animate-pulse")}
-        >
-          {isLoading ? "Making you epic..." : "More epic please"}
-        </Button>
-      </div>
+      {level < 3 && (
+        <div className="text-center">
+          <Button
+            onClick={() => {
+              setLevel((n) => n + 1);
+              setIsLoading(true);
+            }}
+            disabled={isLoading}
+            className={clsx(isLoading && "animate-pulse")}
+          >
+            {isLoading ? "Making you epic..." : "Generate a more epic version!"}
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

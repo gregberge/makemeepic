@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
-import { signText } from "@/app/signature";
+import { signText } from "@/lib/signature";
 
 // Create an OpenAI API client (that's edge friendly!)
 const openai = new OpenAI({
@@ -11,11 +11,24 @@ const openai = new OpenAI({
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { prompt, signature, level } = await req.json();
+  const params: Record<string, unknown> = await req.json();
+
+  if (typeof params.prompt !== "string") {
+    throw new Error("Invalid prompt");
+  }
+
+  if (typeof params.signature !== "string") {
+    throw new Error("Invalid prompt");
+  }
+
+  const level = Number(params.level);
+  if (isNaN(level) || level < 0 || level > 3) {
+    throw new Error("Invalid level");
+  }
 
   // Verify the signature using the secret
-  const expectedSignature = await signText(prompt);
-  if (signature !== expectedSignature) {
+  const expectedSignature = await signText(params.prompt);
+  if (params.signature !== expectedSignature) {
     throw new Error("Invalid signature");
   }
 
@@ -38,7 +51,7 @@ Given a CV, generate titles for the person, with the following constraints:
 - Maximum 300 characters.
 
 Resume of CV:
-${prompt}
+${params.prompt}
 "
 `.trim(),
       },
@@ -50,6 +63,20 @@ ${prompt}
   });
   // Convert the response into a friendly text-stream
   const stream = OpenAIStream(response);
+  const appendSignature = () => {
+    let text = "";
+    return new TransformStream({
+      async transform(chunk, controller) {
+        text += Buffer.from(chunk).toString("utf-8");
+        controller.enqueue(chunk);
+      },
+      async flush(controller) {
+        const signature = await signText(text);
+        console.log({ text, signature });
+        controller.enqueue(`---SIGN---\n${signature}`);
+      },
+    });
+  };
   // Respond with the stream
-  return new StreamingTextResponse(stream);
+  return new StreamingTextResponse(stream.pipeThrough(appendSignature()));
 }

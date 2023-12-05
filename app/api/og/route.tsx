@@ -45,7 +45,7 @@ export async function GET(request: Request) {
               src="https://makemeepic.app/assets/og-header.png"
               width="1520"
               height="200"
-              style={{ marginBottom: "64px" }}
+              style={{ marginBottom: "32px" }}
               alt=""
             />
 
@@ -96,7 +96,7 @@ export async function GET(request: Request) {
               style={
                 {
                   color: "#ffffff",
-                  fontSize: "60px",
+                  fontSize: "44px",
                   padding: "20px",
                   textAlign: "center",
                   textWrap: "balance",
@@ -110,7 +110,7 @@ export async function GET(request: Request) {
       ),
       {
         width: 1600,
-        height: 900,
+        height: 836,
         fonts: [
           {
             name: "IMFellEnglish",

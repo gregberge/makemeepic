@@ -22,6 +22,19 @@ function parseCompletion(completion: string) {
   return { text, signature };
 }
 
+async function downloadImage(imageSrc: string, name: string) {
+  const image = await fetch(imageSrc);
+  const imageBlog = await image.blob();
+  const imageURL = URL.createObjectURL(imageBlog);
+
+  const link = document.createElement("a");
+  link.href = imageURL;
+  link.download = name + ".png";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
 const CompletionShare = React.memo(function CompletionShare({
   text,
   signature,
@@ -36,11 +49,11 @@ const CompletionShare = React.memo(function CompletionShare({
   const token = formatToken({ name, text, signature });
   const url = new URL(`/share/${token}`, window.location.origin);
   const shareText = `👑 Just unleashed my legendary titles!\nGenerate yours with ${window.location.origin}.\n${url.href}`;
-
+  const imageUrl = `https://makemeepic.app/api/og?token=${token}`;
   const clipboard = useClipboard({ copiedTimeout: 600 });
 
   return (
-    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-4 items-center">
+    <div className="absolute w-full -bottom-6 flex gap-4 justify-center items-center">
       <Button asChild>
         <a
           href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
@@ -57,6 +70,19 @@ const CompletionShare = React.memo(function CompletionShare({
         >
           Share on X
         </a>
+      </Button>
+      <Button
+        type="button"
+        onClick={() => {
+          plausible("download-image", {
+            props: {
+              url: imageUrl,
+            },
+          });
+          downloadImage(imageUrl, `${name} | Make me Epic`);
+        }}
+      >
+        Download as image
       </Button>
       <Button
         type="button"

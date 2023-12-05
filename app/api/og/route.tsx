@@ -42,7 +42,7 @@ export async function GET(request: Request) {
             }}
           >
             <img
-              src="https://i.ibb.co/JrXBM3p/header.png"
+              src="https://makemeepic.app/assets/og-header.png"
               width="1520"
               height="200"
               style={{ marginBottom: "64px" }}

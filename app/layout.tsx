@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "Make me Epic - Generate epic titles from your CV",
   description:
     "Generate epic titles from your LinkedIn CV, become the Mother of Dragons or the King of the North.",
+  twitter: {
+    card: "summary_large_image",
+    creator: "@gregberge_",
+  },
 };
 
 export default function RootLayout({

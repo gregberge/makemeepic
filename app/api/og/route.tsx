@@ -25,14 +25,14 @@ export async function GET(request: Request) {
             display: "flex",
             height: "100%",
             width: "100%",
-            backgroundImage: "linear-gradient(to bottom, #0954AC, #011A46)",
+            backgroundImage: "linear-gradient(to bottom, #2563eb, #1e3a8a)",
           }}
         >
           <div
             style={{
               display: "flex",
               border: "16px",
-              borderColor: "#FFD703",
+              borderColor: "#FACC14",
               height: "100%",
               width: "100%",
               flexDirection: "column",
@@ -51,7 +51,7 @@ export async function GET(request: Request) {
 
             <div
               style={{
-                color: "#FFD703",
+                color: "#FACC14",
                 fontSize: "72px",
                 marginBottom: "32px",
               }}
@@ -66,27 +66,27 @@ export async function GET(request: Request) {
               fill="none"
             >
               <path
-                fill="#FFD703"
+                fill="#FACC14"
                 fillRule="evenodd"
                 d="m133.471 9.528 8.676-8.676a1.21 1.21 0 0 1 1.707 0l8.676 8.676a1.21 1.21 0 0 1 0 1.706l-8.676 8.677a1.21 1.21 0 0 1-1.707 0l-8.676-8.677a1.21 1.21 0 0 1 0-1.706ZM160.36 11.933a1.016 1.016 0 0 1 0-2.033h122.456a1.018 1.018 0 0 1 0 2.033H160.36Z"
                 clipRule="evenodd"
               />
               <path
-                fill="#FFD703"
+                fill="#FACC14"
                 d="M160.361 13.754a2.838 2.838 0 1 0 0-5.676 2.838 2.838 0 0 0 0 5.676Z"
               />
               <path
-                fill="#FFD703"
+                fill="#FACC14"
                 fillRule="evenodd"
                 d="M282.817 13.753a2.842 2.842 0 0 0 2.836-2.838 2.841 2.841 0 0 0-2.836-2.837 2.843 2.843 0 0 0-2.838 2.837 2.843 2.843 0 0 0 2.838 2.838ZM3.184 11.933a1.016 1.016 0 0 1 0-2.033H125.64a1.016 1.016 0 0 1 0 2.033H3.184Z"
                 clipRule="evenodd"
               />
               <path
-                fill="#FFD703"
+                fill="#FACC14"
                 d="M3.185 13.754a2.838 2.838 0 1 0 0-5.676 2.838 2.838 0 0 0 0 5.676Z"
               />
               <path
-                fill="#FFD703"
+                fill="#FACC14"
                 fillRule="evenodd"
                 d="M125.641 13.753a2.844 2.844 0 0 0 2.838-2.838 2.842 2.842 0 0 0-2.838-2.837 2.843 2.843 0 0 0-2.838 2.837 2.844 2.844 0 0 0 2.838 2.838Z"
                 clipRule="evenodd"

@@ -67,8 +67,9 @@ export default async function Page({ params }: Props) {
           </div>
           <div className="relative overflow-hidden pt-8 md:pt-16 pb-20 md:pb-36">
             <div className="text-3xl leading-normal text-center mx-auto text-blue-950 relative z-10 mb-10 px-8">
-              Harness AI to Extract Mythical Titles
-              <br /> from Your LinkedIn.
+              Turn your LinkedIn profile
+              <br />
+              into Legendary Titles!
             </div>
             <div className="max-w-3xl mx-auto px-8">
               <Card header={false} title={name} text={text} />

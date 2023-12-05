@@ -34,7 +34,7 @@ type State =
       result: ResumeResult;
     };
 
-const Section = twc.div`border border-blue-900/80 bg-blue-500/10 p-8 rounded-lg`;
+const Section = twc.div`border border-blue-900/80 p-8 rounded`;
 
 const Separator = () => {
   return (

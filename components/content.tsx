@@ -41,7 +41,7 @@ export function Content() {
           </div>
         </Container>
         <Container className="text-center">
-          <H2>Turn your LinkedIn into an Epic Tale</H2>
+          <H2>Turn your LinkedIn profile into Epic Titles</H2>
           <Separator />
           <Steps />
         </Container>
@@ -115,7 +115,7 @@ export function Content() {
           Crafted under a Parisian full moon using Next.js & OpenAI magic.
         </div>
         <div>
-          Clone it, get rich -{" "}
+          Clone it, get rich —{" "}
           <a
             href="https://github.com/gregberge/makemeepic"
             target="_blank"

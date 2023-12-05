@@ -66,7 +66,7 @@ ${params.prompt}
   const appendSignature = () => {
     let text = "";
     return new TransformStream({
-      async transform(chunk, controller) {
+      transform(chunk, controller) {
         text += Buffer.from(chunk).toString("utf-8");
         controller.enqueue(chunk);
       },

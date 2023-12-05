@@ -7,6 +7,7 @@ import { ResumeResult } from "./types";
 import { Card } from "@/components/card";
 import { useClipboard } from "use-clipboard-copy";
 import { formatToken } from "@/lib/token";
+import { usePlausible } from "next-plausible";
 
 const getNameFromResume = (resume: string) => {
   return resume.match(/# (.*)/i)?.[1] ?? "You";
@@ -18,6 +19,9 @@ const Name = React.memo(function Name({ resume }: { resume: string }) {
 
 function parseCompletion(completion: string) {
   const [text, signature] = completion.split(/---SIGN---\s/);
+  if (!text || !signature) {
+    throw new Error("Invalid completion");
+  }
   return { text, signature };
 }
 
@@ -30,6 +34,7 @@ const CompletionShare = React.memo(function CompletionShare({
   signature: string;
   resume: string;
 }) {
+  const plausible = usePlausible();
   const name = getNameFromResume(resume);
   const token = formatToken({ name, text, signature });
   const url = new URL(`/share/${token}`, window.location.origin);
@@ -45,11 +50,28 @@ const CompletionShare = React.memo(function CompletionShare({
             shareText,
           )}`}
           target="_blank"
+          onClick={() =>
+            plausible("share-twitter", {
+              props: {
+                url: url.href,
+              },
+            })
+          }
         >
           Share on X
         </a>
       </Button>
-      <Button type="button" onClick={() => clipboard.copy(url.href)}>
+      <Button
+        type="button"
+        onClick={() => {
+          plausible("copy-link", {
+            props: {
+              url: url.href,
+            },
+          });
+          clipboard.copy(url.href);
+        }}
+      >
         {clipboard.copied ? "Copied" : "Copy link"}
       </Button>
     </div>
@@ -95,6 +117,7 @@ const Completion = React.memo(function Completion({
 });
 
 export function Generate(props: { resume: ResumeResult }) {
+  const plausible = usePlausible();
   const [level, setLevel] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
   const finish = React.useCallback(() => {
@@ -119,6 +142,7 @@ export function Generate(props: { resume: ResumeResult }) {
             onClick={() => {
               setLevel((n) => n + 1);
               setIsLoading(true);
+              plausible("more-epic");
             }}
             disabled={isLoading}
             className={clsx(isLoading && "animate-pulse")}

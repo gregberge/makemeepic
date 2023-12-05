@@ -5,6 +5,7 @@ import { Container } from "@/components/container";
 import { Separator } from "@/components/separator";
 import { H2 } from "@/components/typography";
 import Image from "next/image";
+import { TrackedLink } from "./trackedLink";
 
 export function Content() {
   return (
@@ -69,7 +70,8 @@ export function Content() {
                 </div>
                 <div className="mt-8 flex gap-8 justify-center pb-4">
                   <div className="flex relative">
-                    <a
+                    <TrackedLink
+                      event="personal-twitter"
                       href="https://x.com/gregberge_"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -82,12 +84,13 @@ export function Content() {
                         height={32}
                         className="inline-block"
                       />
-                    </a>
+                    </TrackedLink>
                     <div className="absolute hidden md:block -bottom-[72px] -left-[202px] aspect-[567/237] w-60 pointer-events-none">
                       <Image src="/assets/follow-me.png" alt="Follow me" fill />
                     </div>
                   </div>
-                  <a
+                  <TrackedLink
+                    event="personal-github"
                     href="https://github.com/gregberge"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -100,7 +103,7 @@ export function Content() {
                       height={32}
                       className="inline-block"
                     />
-                  </a>
+                  </TrackedLink>
                 </div>
               </div>
             }

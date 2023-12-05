@@ -9,8 +9,8 @@ import { Button } from "@/components/button";
 import { FileText } from "lucide-react";
 import { ResumeResult } from "./types";
 import { twc } from "@/lib/twc";
-import { H2, H3 } from "@/components/typography";
-import { Container } from "@/components/container";
+import { H3 } from "@/components/typography";
+import { usePlausible } from "next-plausible";
 
 type State =
   | {
@@ -55,6 +55,8 @@ export function Upload(props: { onComplete: (result: ResumeResult) => void }) {
     result: null,
   });
 
+  const plausible = usePlausible();
+
   const { getRootProps, getInputProps, isDragReject, isDragAccept } =
     useDropzone({
       multiple: false,
@@ -62,6 +64,7 @@ export function Upload(props: { onComplete: (result: ResumeResult) => void }) {
         "application/pdf": [".pdf"],
       },
       onDrop: (acceptedFiles) => {
+        plausible("cv-upload");
         const file = acceptedFiles[0];
         const form = new FormData();
 

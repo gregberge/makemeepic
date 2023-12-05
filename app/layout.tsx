@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Caudex, IM_Fell_English } from "next/font/google";
 import "./globals.css";
+import PlausibleProvider from "next-plausible";
 
 const im = IM_Fell_English({
   weight: "400",
@@ -30,6 +31,9 @@ export default function RootLayout({
       lang="en"
       className={`${im.variable} ${caudex.variable} font-im text-white bg-[#011A46]`}
     >
+      <head>
+        <PlausibleProvider domain="makemeepic.app" />
+      </head>
       <body>{children}</body>
     </html>
   );

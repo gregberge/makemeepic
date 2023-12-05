@@ -5,6 +5,7 @@ export async function parseToken(token: string) {
   const [name, text, signature] = decode(token).split("__");
   const expectedSignature = await signText(text);
   if (signature !== expectedSignature) {
+    console.error("Invalid signature", { signature, expectedSignature });
     throw new Error("Invalid signature");
   }
 

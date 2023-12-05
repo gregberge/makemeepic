@@ -21,9 +21,13 @@ export const metadata: Metadata = {
   title: "Make me Epic - Generate epic titles from your CV",
   description:
     "Generate epic titles from your LinkedIn CV, become the Mother of Dragons or the King of the North.",
+  openGraph: {
+    images: ["https://makemeepic.app/assets/og-image.png"],
+  },
   twitter: {
     card: "summary_large_image",
     creator: "@gregberge_",
+    images: ["https://makemeepic.app/assets/og-image.png"],
   },
 };
 

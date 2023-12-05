@@ -1,10 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
-import { Steps } from "./steps";
-import { Card } from "@/components/card";
-import { Separator } from "@/components/separator";
-import { H2 } from "@/components/typography";
-import { Container } from "@/components/container";
 import { Content } from "@/components/content";
 
 export default function Home() {

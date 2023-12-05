@@ -18,9 +18,9 @@ const caudex = Caudex({
 });
 
 export const metadata: Metadata = {
-  title: "Make me Epic - Generate epic titles from your CV",
+  title: "Make me Epic - Turn your LinkedIn profile into Legendary Titles!",
   description:
-    "Generate epic titles from your LinkedIn CV, become the Mother of Dragons or the King of the North.",
+    "AI powered generator that turns your LinkedIn profile into Epic Titles, become the Mother of Dragons or the King of the North.",
   openGraph: {
     images: ["https://makemeepic.app/assets/og-image.png"],
   },

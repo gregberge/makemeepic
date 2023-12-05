@@ -40,9 +40,10 @@ export default function Home() {
           </div>
         </div>
         <div className="relative overflow-hidden">
-          <div className="text-2xl md:text-3xl leading-normal text-center mx-auto text-blue-950 mb-[25vw] relative z-10">
-            Harness AI to Extract Mythical Titles
-            <br /> from Your LinkedIn.
+          <div className="text-2xl md:leading-normal md:text-3xl text-center mx-auto text-blue-950 mb-[25vw] relative z-10">
+            Turn your LinkedIn profile
+            <br />
+            into Legendary Titles!
           </div>
           <div className="absolute aspect-[962/940] w-[60vw] -bottom-[34vw] -left-[8vw]">
             <Image src="/assets/mountain1.svg" alt="" fill />

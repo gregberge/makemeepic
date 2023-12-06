@@ -18,16 +18,17 @@ const caudex = Caudex({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://makemeepic.app/"),
   title: "Make me Epic - Turn your LinkedIn profile into Legendary Titles!",
   description:
     "AI powered generator that turns your LinkedIn profile into Epic Titles, become the Mother of Dragons or the King of the North.",
   openGraph: {
-    images: ["https://makemeepic.app/assets/og-image.png"],
+    images: ["/assets/og-image.png"],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@gregberge_",
-    images: ["https://makemeepic.app/assets/og-image.png"],
+    images: ["/assets/og-image.png"],
   },
 };
 

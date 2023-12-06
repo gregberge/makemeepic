@@ -14,11 +14,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: `${name} | Make me Epic`,
       openGraph: {
-        images: ["https://makemeepic.app/api/og?token=" + params.token],
+        images: ["/api/og?token=" + params.token],
       },
       twitter: {
         card: "summary_large_image",
-        images: ["https://makemeepic.app/api/og?token=" + params.token],
+        images: ["/api/og?token=" + params.token],
       },
     };
   } catch (e) {

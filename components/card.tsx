@@ -21,7 +21,7 @@ export function Card({
   return (
     <div
       className={clsx(
-        "border-8 rounded-2xl border-yellow-400 bg-gradient-to-b from-blue-600 to-blue-900",
+        "border-8 rounded-2xl border-yellow-400 bg-gradient-to-b from-blue-600 to-blue-900 select-text",
         className,
         size === "small" && "p-4",
         size === "large" && "p-4 pb-12",
@@ -75,7 +75,9 @@ export function Card({
       <div
         className={clsx(
           "w-full whitespace-pre-line min-h-[11.25rem]",
-          size === "small" ? "text-xl" : "text-xl md:text-3xl",
+          size === "small"
+            ? "text-xl leading-normal"
+            : "text-xl md:text-3xl md:leading-normal",
           textAlign === "left" && "text-left",
           textAlign === "center" && "text-center",
         )}

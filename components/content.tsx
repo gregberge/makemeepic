@@ -85,9 +85,6 @@ export function Content() {
                         className="inline-block"
                       />
                     </TrackedLink>
-                    <div className="absolute hidden md:block -bottom-[72px] -left-[202px] aspect-[567/237] w-60 pointer-events-none">
-                      <Image src="/assets/follow-me.png" alt="Follow me" fill />
-                    </div>
                   </div>
                   <TrackedLink
                     event="personal-github"
@@ -110,7 +107,7 @@ export function Content() {
           />
         </Container>
       </div>
-      <Container className="py-4 text-center text-lg font-caudex text-blue-200">
+      <Container className="py-4 pb-12 md:pb-4 text-center text-lg font-caudex text-blue-200">
         <div>
           Crafted under a Parisian full moon using Next.js & OpenAI magic.
         </div>

@@ -2,7 +2,7 @@
 "use client";
 import * as React from "react";
 import { useDropzone } from "react-dropzone";
-import { extractTextFromCV } from "./extractTextFromCV";
+import { extractTextFromResume } from "./extractTextFromResume";
 import Image from "next/image";
 import clsx from "clsx";
 import { Button } from "@/components/button";
@@ -70,7 +70,7 @@ export function Upload(props: { onComplete: (result: ResumeResult) => void }) {
 
         form.append("file", file);
         setState({ status: "loading", error: null, result: null });
-        extractTextFromCV(form)
+        extractTextFromResume(form)
           .then((result) => {
             props.onComplete(result);
           })
@@ -95,7 +95,7 @@ export function Upload(props: { onComplete: (result: ResumeResult) => void }) {
         </Button>
       </Section>
       <Section className="flex-1 w-full">
-        <H3>2. Save your CV as PDF</H3>
+        <H3>2. Save your resume as PDF</H3>
         <div className="relative aspect-[572/508] mx-auto">
           <Image quality={100} src="/assets/linkedin-page.png" alt="" fill />
         </div>
@@ -123,15 +123,15 @@ export function Upload(props: { onComplete: (result: ResumeResult) => void }) {
                 {isDragAccept ? (
                   <p>Drop the file here ...</p>
                 ) : isDragReject ? (
-                  <p>This is not a CV</p>
+                  <p>This is not a resume</p>
                 ) : (
-                  <p>Drop your LinkedIn CV or click to upload it</p>
+                  <p>Drop your LinkedIn resume or click to upload it</p>
                 )}
               </div>
             )}
             {state.status === "loading" && (
               <div className="my-10 h-12 flex items-center justify-center">
-                Analyzing your CV...
+                Analyzing your resume...
               </div>
             )}
           </div>

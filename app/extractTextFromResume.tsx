@@ -8,7 +8,9 @@ function checkIsFile(file: any): file is File {
   return file && file.name && file.arrayBuffer;
 }
 
-export async function extractTextFromCV(form: FormData): Promise<ResumeResult> {
+export async function extractTextFromResume(
+  form: FormData,
+): Promise<ResumeResult> {
   const file = form.get("file");
   if (!checkIsFile(file)) {
     throw new Error("File not found");

@@ -41,16 +41,16 @@ export async function POST(req: Request) {
       {
         role: "user",
         content: `
-Given a CV, generate titles for the person, with the following constraints:
+Given a resume, generate titles for the person, with the following constraints:
 - Example of Output: "Daenerys Targaryen, the First of Her Name, Queen of the Andals and the First Men, Protector of the Seven Kingdoms, the Mother of Dragons, the Khaleesi of the Great Grass Sea, the Unburnt, the Breaker of Chains.
 - One line with every titles.
-- The input will be a CV of a person.
+- The input will be a resume of a person.
 - Make it epic and fun!
 - No multiple propositions.
-- In the language of the CV.
+- In the language of the resume.
 - Maximum 300 characters.
 
-Resume of CV:
+Resume:
 ${params.prompt}
 "
 `.trim(),
